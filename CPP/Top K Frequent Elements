@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+    
+        map<int,int> mp;
+        for(int i=0;i<nums.size();i++){
+            mp[nums[i]]++;
+        }
+        
+        multimap<int,int, greater<int>> freq;
+        
+        for(auto x : mp){
+            freq.insert({x.second,x.first});
+        }
+        
+        vector<int> ans;
+        
+        for(auto i:freq){
+            if(k>0){
+                ans.push_back(i.second);
+                k--;
+            }
+            else
+                break;
+        }
+        
+        return ans;
+    }
+};
