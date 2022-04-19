@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int ans=0;
+    
+    //return max path sum without split
+    int maxTree(TreeNode* root){
+            if(root==NULL) return 0;
+            
+            int left=maxTree(root->left);
+            int right=maxTree(root->right);
+            left=max(left,0);
+            right=max(right,0);
+        
+        //compute max path sum with split
+            ans=max(ans,root->val+left+right);
+            
+            return root->val+max(left,right);
+        }
+   
+    int maxPathSum(TreeNode* root) {
+        ans=root->val;
+        maxTree(root);
+        
+        return ans;
+    }
+};
